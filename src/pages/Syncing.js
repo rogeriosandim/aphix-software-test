@@ -119,7 +119,9 @@ const Search = () => {
       </div>
       <div className={classes.root}>
         <Typography className={classes.title} variant='body2'>
-          You need to sync your application at least once to use it.
+          {updated
+            ? 'The application is synced and ready to use!'
+            : 'You need to sync the application at least once to use it!'}
         </Typography>
       </div>
     </>
