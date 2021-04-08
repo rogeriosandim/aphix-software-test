@@ -15,6 +15,7 @@ import {
   Favorite as FavoriteIcon,
   ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
+import parse from 'html-react-parser';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ const ProductViewCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [favourite, setFavourite] = useState(false);
+  const parsedDescription = parse(`${description}`);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -92,10 +94,10 @@ const ProductViewCard = (props) => {
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography variant='body2' color='textSecondary' component='p'>
-            {description}
+          <Typography variant='body2' color='textSecondary' component='div'>
+            {parsedDescription}
           </Typography>
-          <Typography variant='body2' color='textSecondary' component='p'>
+          <Typography variant='body2' color='textSecondary' component='div'>
             {metaKeywords}
           </Typography>
         </CardContent>
