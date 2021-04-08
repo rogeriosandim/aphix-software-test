@@ -10,22 +10,11 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Redirect exact from='/' to='/search' />
-        <RouteWithLayout
-          component={Search}
-          exact
-          layout={Main}
-          path='/search'
-        />
-        <RouteWithLayout
-          component={Syncing}
-          exact
-          layout={Main}
-          path='/syncing'
-        />
+        <Redirect exact from='/' to='/syncing' />
+        <RouteWithLayout component={Search} layout={Main} path='/search' />
+        <RouteWithLayout component={Syncing} layout={Main} path='/syncing' />
         <RouteWithLayout
           component={ProductDescription}
-          exact
           layout={Main}
           path='/description'
         />
