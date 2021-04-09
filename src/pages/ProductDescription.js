@@ -14,7 +14,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   title: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 2, 1, 2),
+    color: theme.palette.text.secondary,
+  },
+  subTitle: {
+    padding: theme.spacing(0, 2, 1, 2),
     color: theme.palette.text.secondary,
   },
 }));
@@ -38,6 +42,9 @@ const ProductDescription = () => {
     <>
       <Typography className={classes.title} variant='h1' gutterBottom>
         Product Description
+      </Typography>
+      <Typography className={classes.subTitle} variant='body2' gutterBottom>
+        Click on the arrow to find more about the product!
       </Typography>
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
