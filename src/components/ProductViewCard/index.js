@@ -54,6 +54,7 @@ const ProductViewCard = (props) => {
   const [expanded, setExpanded] = useState(false);
   const [favourite, setFavourite] = useState(false);
   const parsedDescription = parse(`${description}`);
+  const parsedName = parse(`${name}`);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -65,7 +66,11 @@ const ProductViewCard = (props) => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader className={classes.header} title={name} subheader={sku} />
+      <CardHeader
+        className={classes.header}
+        title={parsedName}
+        subheader={sku}
+      />
       <CardMedia
         className={classes.media}
         image={`https://webshop-staging.aphixsoftware.com/${image}`}
