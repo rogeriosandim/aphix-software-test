@@ -95,10 +95,12 @@ const Main = (props) => {
     handleMobileMenuClose();
     history.push('/search');
   };
+
   const handlePushDescription = () => {
     handleMobileMenuClose();
     history.push('/description');
   };
+
   const handlePushSyncing = () => {
     handleMobileMenuClose();
     history.push('/syncing');
