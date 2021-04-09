@@ -7,10 +7,12 @@ import {
   Card,
   CardHeader,
   Avatar,
+  Button,
 } from '@material-ui/core';
 import { Sync, Check, Close } from '@material-ui/icons';
 import clsx from 'clsx';
 import api from '../services/api';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [updated, setUpdated] = useState(false);
   const [timeUpdated, setTimeUpdated] = useState(
@@ -54,6 +57,10 @@ const Search = () => {
       setTimeUpdated(localStorage.getItem('lastSync'));
     }
   }, [allProductsStorage]);
+
+  const handlePushSearch = () => {
+    history.push('/search');
+  };
 
   useEffect(() => {
     CheckLocalStorage();
@@ -123,6 +130,19 @@ const Search = () => {
             ? 'The application is synced and ready to use!'
             : 'You need to sync the application at least once to use it!'}
         </Typography>
+      </div>
+      <div className={classes.root}>
+        {updated ? (
+          <Button
+            onClick={handlePushSearch}
+            variant='contained'
+            color='primary'
+          >
+            Go to Search
+          </Button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
