@@ -142,13 +142,11 @@ const Main = (props) => {
     <div className={classes.grow}>
       <AppBar position='static'>
         <Toolbar>
-          <Typography
-            onClick={handlePushSearch}
-            className={classes.title}
-            variant='h1'
-          >
-            Aphix Software
-          </Typography>
+          <a href={'https://www.aphixsoftware.com/'}>
+            <Typography className={classes.title} variant='h1'>
+              Aphix Software
+            </Typography>
+          </a>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton onClick={handlePushSearch} color='inherit'>
