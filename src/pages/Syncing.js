@@ -9,7 +9,7 @@ import {
   Avatar,
   Button,
 } from '@material-ui/core';
-import { Sync, Check, Close } from '@material-ui/icons';
+import { Sync, Check, Close, Delete } from '@material-ui/icons';
 import clsx from 'clsx';
 import api from '../services/api';
 import { useHistory } from 'react-router-dom';
@@ -37,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
   },
   close: {
     backgroundColor: '#D4026E',
+  },
+  syncIcon: {
+    display: 'grid',
+    color: '#43b39e',
+  },
+  deleteIcon: {
+    display: 'grid',
+    color: '#D4026E',
   },
 }));
 
@@ -88,6 +96,13 @@ const Search = () => {
     }, 1500);
   }, []);
 
+  const handleClearStorage = useCallback(async () => {
+    localStorage.removeItem('allProducts');
+    localStorage.removeItem('defaultImage');
+    localStorage.removeItem('lastSync');
+    setUpdated(false);
+  }, []);
+
   return (
     <>
       <Typography className={classes.title} variant='h1' gutterBottom>
@@ -107,24 +122,44 @@ const Search = () => {
               </Avatar>
             }
             action={
-              <IconButton onClick={handleSync} color='primary' component='span'>
-                {loading ? (
-                  <CircularProgress
-                    variant='indeterminate'
-                    disableShrink
-                    size={25}
-                  />
+              <>
+                <IconButton
+                  className={classes.syncIcon}
+                  onClick={handleSync}
+                  color='primary'
+                  component='span'
+                >
+                  {loading ? (
+                    <CircularProgress
+                      className={classes.syncIcon}
+                      variant='indeterminate'
+                      disableShrink
+                      size={24}
+                    />
+                  ) : (
+                    <Sync />
+                  )}
+                </IconButton>
+                {updated ? (
+                  <IconButton
+                    className={classes.deleteIcon}
+                    onClick={handleClearStorage}
+                    color='primary'
+                    component='span'
+                  >
+                    <Delete />
+                  </IconButton>
                 ) : (
-                  <Sync />
+                  <></>
                 )}
-              </IconButton>
+              </>
             }
             title={
               updated
                 ? 'Last time synched:'
                 : `Your application hasn't been synched!`
             }
-            subheader={timeUpdated}
+            subheader={updated && timeUpdated}
           />
         </Card>
       </div>
