@@ -49,12 +49,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductViewCard = (props) => {
-  const { name, description, metaKeywords, image, sku, imageName } = props;
+  const {
+    name,
+    description,
+    metaKeywords,
+    image,
+    sku,
+    imageName,
+    isOnline,
+  } = props;
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [favourite, setFavourite] = useState(false);
   const parsedDescription = parse(`${description}`);
   const parsedName = parse(`${name}`);
+  const offlineImage = localStorage.getItem('defaultImage');
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -72,8 +81,13 @@ const ProductViewCard = (props) => {
         subheader={sku}
       />
       <CardMedia
+        id='image'
         className={classes.media}
-        image={`https://webshop-staging.aphixsoftware.com/${image}`}
+        image={
+          isOnline
+            ? `https://webshop-staging.aphixsoftware.com/${image}`
+            : `${offlineImage}`
+        }
         title={imageName}
       />
       <CardActions disableSpacing>
