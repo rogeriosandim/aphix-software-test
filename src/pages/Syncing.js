@@ -159,7 +159,9 @@ const Search = () => {
                 ? 'Last time synched:'
                 : `Your application hasn't been synched!`
             }
-            subheader={updated && timeUpdated}
+            subheader={
+              updated ? timeUpdated : 'Click on the icon beside to sync.'
+            }
           />
         </Card>
       </div>
