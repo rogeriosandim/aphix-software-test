@@ -142,7 +142,11 @@ const Main = (props) => {
     <div className={classes.grow}>
       <AppBar position='static'>
         <Toolbar>
-          <a href={'https://www.aphixsoftware.com/'}>
+          <a
+            href={'https://www.aphixsoftware.com/'}
+            target='_blank'
+            rel='noreferrer'
+          >
             <Typography className={classes.title} variant='h1'>
               Aphix Software
             </Typography>
