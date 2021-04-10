@@ -27,6 +27,7 @@ const ProductDescription = () => {
   const classes = useStyles();
   const history = useHistory();
   const allProductsStorage = JSON.parse(localStorage.getItem('allProducts'));
+  const isOnline = window.navigator.onLine;
 
   const CheckLocalStorage = useCallback(async () => {
     if (allProductsStorage === null) {
@@ -53,6 +54,7 @@ const ProductDescription = () => {
               allProductsStorage.map((product) => (
                 <Grid key={product.data} item>
                   <ProductViewCard
+                    isOnline={isOnline}
                     name={product.value}
                     description={product.info.Text}
                     metaKeywords={product.info.MetaKeywords}

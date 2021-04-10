@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 2),
   },
   input: {
-    backgroundColor: theme.palette.background.paper,
     width: '100%',
     maxWidth: 500,
   },
@@ -30,6 +29,7 @@ const ProductDescription = () => {
   const history = useHistory();
   const allProductsStorage = JSON.parse(localStorage.getItem('allProducts'));
   const searchProducts = [];
+  const isOnline = window.navigator.onLine;
 
   const CheckLocalStorage = useCallback(async () => {
     if (allProductsStorage === null) {
@@ -91,6 +91,13 @@ const ProductDescription = () => {
       <div className={classes.searchBox}>
         <TextField
           type='text'
+          helperText={
+            query === ''
+              ? 'Type anything you want to search for!'
+              : searchResults.length === 0
+              ? 'There is no product that matches the search. Try search for something else!'
+              : ''
+          }
           className={classes.input}
           onChange={handleSearch}
           value={query}
@@ -115,6 +122,7 @@ const ProductDescription = () => {
               searchResults.map((product) => (
                 <Grid key={product.data} item>
                   <ProductViewCard
+                    isOnline={isOnline}
                     name={product.value}
                     description={product.text}
                     metaKeywords={product.metaKeywords}
