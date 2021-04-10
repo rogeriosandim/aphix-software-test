@@ -13,6 +13,8 @@ import { Sync, Check, Close } from '@material-ui/icons';
 import clsx from 'clsx';
 import api from '../services/api';
 import { useHistory } from 'react-router-dom';
+import getBase64FromUrl from '../helpers/getBase64FromUrl';
+import defaultImage from '../assets/images/product/no-image.jpeg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,12 +74,14 @@ const Search = () => {
     const indexStart = data.indexOf('all_products = [{');
     const indexEnd = data.indexOf('}}];');
     const allProducts = data.slice(indexStart, indexEnd).concat('}}]');
+    const offlineImage = await getBase64FromUrl(defaultImage);
 
     localStorage.setItem(
       'allProducts',
       allProducts.replace('all_products = [{', '[{')
     );
     localStorage.setItem('lastSync', new Date());
+    localStorage.setItem('defaultImage', offlineImage);
 
     timerRef.current = window.setTimeout(() => {
       setLoading(false);
